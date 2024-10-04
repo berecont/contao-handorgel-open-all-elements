@@ -1,0 +1,25 @@
+{# /templates/content_elemtn/accordion/all-open.html.twig #}
+
+{% extends "@Contao/content_element/accordion.html.twig" %}
+
+{% block element_content %}
+    {% set accordion_content_attributes = attrs()
+        .addClass('handorgel__content')
+        .set('data-open', element.is_open ? 'true' : 'false')  
+        .mergeWith(accordion_content_attributes|default)
+    %}
+    <div{{ accordion_content_attributes }}>
+        {% set accordion_content_inner_attributes = attrs()
+            .addClass('handorgel__content__inner')
+            .mergeWith(accordion_content_inner_attributes|default)
+        %}
+        <div{{ accordion_content_inner_attributes }}>
+            {{ content_element(element.reference) }}
+        </div>
+    </div>
+{% endblock %}
+
+{% block init_options %}
+    multiSelectable: true,
+    {# Put custom options here #}
+{% endblock %}
